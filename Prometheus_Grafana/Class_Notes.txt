@@ -1,0 +1,269 @@
+
+Edu - Continuous Monitoring and DevOps on AWS
+
+Start Date : 15th Feb. 2025
+Time : 8PM IST - 11PM IST - WeekEnd
+
+
+#######################
+Day 1 - 15th Feb. 2025
+#######################
+
+	Continuous Monitoring and DevOps on AWS
+	
+	DevOps  -
+	
+	Access to AWS Cloud Console 
+	
+	
+	k8s -> pods -> k8s dashboard using Helm?
+	
+	kubectl cmd line utility -->
+	
+	
+	EKS - aws --> monitoring capabilities - Dashboards
+	
+	AKS - Azure 
+	
+	GKE - GCP
+	
+	Open-Source Kubernetes 			==> Kubeadm
+	
+	- Helm Charts 
+	
+		- Create and configure K8s Dashboards 
+		
+		- Monitoring ==> Prometheus/Grafana
+		
+	
+	What is Continuous Monitoring?
+		
+		E_Commerce Web Application: 
+		
+			- Kubernetes - CI-CD 
+			
+			- Ensure High-Availability of my Application ????
+			
+				Kubernetes_Master 		PROD
+					- Kubernetes_WN1,2,3,4,5,6,.................,200
+					
+				All Prod Servers are available 24/7
+			
+				Network / Traffic
+				
+				10000 Users can simultaneously access the application 
+				
+				50000 Users ?				
+				
+				Continuous Monitoring!
+				
+					- Is used to Ensure High-Availability of Application
+					
+					- Is used to Ensure the Business Continuity
+					
+	How to Implement Continuous Monitoring ?
+	
+		- Production Monitoring/Support Team 
+		
+		
+		
+		
+		- Continuous Monitoring is part DevOps Lifecycle
+		
+		
+		- Infra-Structure Perspective :
+		
+			- CPU Utilization 			
+			- Memory Utilization 			
+			- Network/Traffic 
+			
+			Infra-Structure Monitoring Tools :
+			
+				- Prometheus/Grafana/Nagios/Splunk/Dynatrace/AWS-Cloud_Watch/Azure-Monitor 
+				
+				- Monitor the Infra-Structure - CPU/Memory/Network
+				
+				- Setup the threshold limit of CPU/Memory/Network Utilization
+				
+					- CPU Utilization reaches 80% --> Alert the User
+
+						- Kill the process 
+						- Add More CPUs 
+				
+					- Memory Utilization reaches 70% --> Alert the User
+
+						- Delete/Cleanup the Volumes  
+						- Add More Memory/Storage 	
+		
+		- Application Perspective
+		
+			- Micro-Service1,....................,1000
+			
+			- Any Service will interact with the Database 
+			
+				- Response Time!
+				
+			Application Monitoring Tools :
+			
+				- AppDynamics / DataDog 
+				
+
+
+
+	Infra-Structure Monitoring Tools :
+	
+		- Prometheus	# It is the Infra-Structure Monitoring Tool
+
+		- Grafana		# It is the Visualization Tool to Create Monitoring Dashboards
+			
+		
+		
+	Working with Prometheus and Grafana :::
+	
+		-> Dedicated Prometheus Server interated with Grafana 
+		
+		-> Kubernetes Cluster Monitoring using Prometheus & Grafana
+			- Using Helm Charts 
+			
+			- Configure Kubernetes_Master & Kubernetes_WN1,2
+					- t2.medium Instance Type
+					- Create Deployment Controller Object 			
+							- Replicaset/5 repicas of Pods
+							
+			- Daemonsets Object 
+	
+
+	Helm Charts :::
+	
+		=>	Helm is a Package Manager for Kubernetes Cluster.
+		
+		Package Manager : apt / yum / dnf	==> Linux 		# Install/Remove/Update the Packages
+		
+		Work with Helm :
+		
+			- Setup Kubernetes Cluster 
+			
+			- Install Helm in Kubernetes_Master
+			
+			- Using Helm we can Install the required Packages in Kubernetes Cluster
+			
+				- Install and Configure Kubernetes Dashboard using Helm
+			
+				- Install and Configure Prometheus & Grafana using Helm
+					
+	Hourly Break - 10 Mins
+	
+	QA -
+
+		Kubernetes_Master
+			Kubernetes_WN1							Region1
+			Kubernetes_WN2							Region1 		
+	
+	Multi-Master Kubernetes Cluster
+	
+		Kubernetes_Master								On_Prem 
+				
+			Kubernetes_Master 							AWS 
+
+				Kubernetes_Cluser1						Region1 
+					Kubernetes_WN1					
+					Kubernetes_WN2
+					Kubernetes_WN3
+
+				Kubernetes_Cluser2						Region2
+					Kubernetes_WN1
+					Kubernetes_WN2
+					Kubernetes_WN3
+
+				Kubernetes_Cluser3						Region3
+					Kubernetes_WN1
+					Kubernetes_WN2
+					Kubernetes_WN3
+
+				Kubernetes_Cluser4						Region4
+					Kubernetes_WN1
+					Kubernetes_WN2
+					Kubernetes_WN3
+
+			Kubernetes_Master 							Azure 
+
+				Kubernetes_Cluser1						Region1 
+					Kubernetes_WN1					
+					Kubernetes_WN2
+					Kubernetes_WN3
+
+				Kubernetes_Cluser2						Region2
+					Kubernetes_WN1
+					Kubernetes_WN2
+					Kubernetes_WN3
+
+				Kubernetes_Cluser3						Region3
+					Kubernetes_WN1
+					Kubernetes_WN2
+					Kubernetes_WN3
+
+				Kubernetes_Cluser4						Region4
+					Kubernetes_WN1
+					Kubernetes_WN2
+					Kubernetes_WN3
+		
+		
+#######################
+Day 2 - 16th Feb. 2025
+#######################		
+	
+		
+	Working with Prometheus and Grafana :::
+	
+		-> Dedicated Prometheus Server interated with Grafana 
+
+		-> Work with Helm :
+		
+			- Setup Kubernetes Cluster 
+			
+			- Install Helm in Kubernetes_Master
+			
+			- Using Helm we can Install the required Packages in Kubernetes Cluster
+			
+				- Install and Configure Kubernetes Dashboard using Helm
+			
+				- Install and Configure Prometheus & Grafana using Helm
+							
+		-> Kubernetes Cluster Monitoring using Prometheus & Grafana
+			- Using Helm Charts 
+			
+			- Configure Kubernetes_Master & Kubernetes_WN1,2
+					- t2.medium Instance Type
+					- Create Deployment Controller Object 			
+							- Replicaset/5 repicas of Pods
+		
+		
+		
+	- Install and Configure Prometheus Monitoring Server :	
+	
+		Monitoring Server Architecture :
+		
+			- Monitoring Server (VM)   	# Install Prometheus and Grafana		- Setup the Inbound rules --> 9090,3000,9100
+										# https://prometheus.io/download/
+										
+
+			
+			- Target Server (VM)		# Install Prometheus Node Exporter Agent
+										# https://prometheus.io/download/
+										
+										
+			- Setup the Inbound rules --> 9090,3000,9100
+			
+				
+			
+			
+			
+	
+		
+	
+	
+	
+	
+		
+
+
