@@ -1,0 +1,89 @@
+
+			
+#######################
+Day 3 - 22nd Feb. 2025
+#######################				
+			
+	Monitor using Prometheus/Grafana 
+	
+	About Nagios - Logger Tools 
+	
+	AWS DevOps Services :
+	
+		- AWS IAM User 
+		
+		
+		- SDLC 
+		
+		- AWS DevOps Services 
+			
+			- Code Commit 
+			- Code Build,............
+			
+			
+		Jenkins Server --> Config File
+		
+			Monitored using Nagios/Splunk 
+			
+			It is used capture the logs/config changes.
+			
+			Jenkins - Console Output?
+			
+		
+	
+#######################
+Day 4 - 23rd Feb. 2025
+#######################		
+
+	AWS DevOps Services :	
+	
+		- IAM 
+		
+		- S3 Bucket			# Used to maintain the Artifacts 		
+	
+		- AWS Code Commit 
+		
+		- AWS Code Build 
+		
+		- AWS Code Deploy 
+		
+		- AWS Code Pipeline 
+		
+	
+	Micro-Service based application Architecture :
+	
+		- Container Services 
+		
+			- AWS Container Service 		--> Docker Engine 	# To Create Container Images and Continers 
+			
+			- AWS Container Registry 		--> DockerHub		# Maintain/Store the Container Images 
+			
+			- AWS Kubernetes Service
+			
+			
+	AWS EBS
+	
+	
+	Web Application : Java Springboot Web Application 
+	
+		Project Folder/Repository  :
+		
+		
+		Source Code repository --> 
+		
+			SRC 
+				- main 
+				- test 		
+				
+			pom.xml 
+	
+			Dockerfile 
+			
+			Kubernetes_Manifest.yaml 
+			
+		Jenkins pipeline =>  to automate application build and deployments in Kubernetes_Cluser ?
+		
+	
+	
+		
+
