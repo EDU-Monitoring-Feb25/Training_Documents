@@ -84,6 +84,210 @@ Day 4 - 23rd Feb. 2025
 		Jenkins pipeline =>  to automate application build and deployments in Kubernetes_Cluser ?
 		
 	
+#######################
+Day 5 - 1st Mar. 2025
+#######################			
+		
+		
+	AWS Code Build :
 	
+		Perform Application build 
+		
+			--> Create Application Artifacts
+			--> Save the Artifacts in s3 Bucket
+			
+			
+		Java Springboot Web Application --> Maven Build and Create Artifacts --> *.war
+		
+		
+		Prepare the Source Code Repository .
+		
+		
+		
+		1. Create AWS s3 Bucket --> edu-s3-cbproj1							# Maintain the Application Artifacts
+		
+			- Create a Folder in S3 Bucket 
+		
+			s3://edu-s3-cbproj1/edu-s3-cbproj1-folder1/
+		
+			https://edu-s3-cbproj1.s3.ap-south-1.amazonaws.com/edu-s3-cbproj1-folder1/
+			
+			
+		2. Create a AWS Code-Build Project 
+		
+		
+				- Pre-requisites :
+				
+						Source Code Repository - Java Maven Web Application
+						
+							- pom.xml 
+							- buildspec.yaml			# Define the Build Specifications 
+														# Define Maven Goals
+														
+				- Build Environment --> 
+				
 		
 
+		Deployment :::		
+		
+			- Copy the artifacts from the s3 Bucket to Target Application Server(QA/UAT/Prod) 
+		
+			- For Any Micro-Service Service Based Application Architecture ::
+			
+				- Use the Application Artifacts and Create Application Container Image(Docker)
+		
+			
+		
+		3. Application Image Creation :::
+		
+			
+			Containerization ::: Is a process of packaging the application along with its dependencies 
+		
+					*.war / *.jar / *.exec / *.dll 
+					
+				Dev Environment :
+				
+					Application build -> mywebapp1.war 
+					
+					Unit Test using the mywebapp1.war 
+					
+						Run the mywebapp1.war to perform Unit Testing 
+						
+						Web Application Server (WAS) : Tomcat / Apache httpd / nginx
+						
+						
+							jdk_17,tomcat_v8.5
+							
+						Package the Application :
+
+							Creating the Container Image : (mywebapp1.war,jdk_17,tomcat_v8.5)	==> mywebapp1-img:v1.0
+							
+							Published to Container Registry 
+								DockerHub 
+								
+							AWS : 
+							
+								- AWS - Container Service - ECS			# Create and manage the Container Images and Containers
+								
+								- AWS - Container Registry - ECR		# Save the Contianer Images
+								
+								- AWS - Kubernetes Service - EKS		# Container Orchestration Tool 
+							
+							
+						
+						Promote the mywebapp1.war to Target Environments (QA_Server)
+						
+						
+						
+						
+						
+				QA_Server : 	mywebapp1.war				# Upon Deployment 
+				
+				
+						Web Application Server (WAS) : jdk_17,tomcat_v8.5
+						
+						jdk_8,tomcat_v8
+					
+					
+				UAT_Server
+				
+				Prod_Server 
+				
+
+	ECR 
+	
+	Connect to AWS using AWS CLI 
+	
+	work with docker images and publish to ECR 
+	
+	
+	
+	On the Build Server :
+	
+		# Install and Setup the AWS Cli
+		
+		snap install aws-cli --classic
+		
+		aws --version
+		
+		# Create AWS Access Key & Secret Keys
+				-- using aws iam console - security credential page
+		
+		aws configure 		To configure the credential.
+			- Access Key 
+			- Secret Key 
+			- Default Region ap-south-1
+			
+		Python scripts ==> to handle aws resources 
+		boto3 
+	
+
+
+loksaieta/sa-webappimg
+
+Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
+
+Install AWS CLI 
+
+aws configure 
+
+
+
+
+Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 682033467551.dkr.ecr.ap-south-1.amazonaws.com
+
+Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+
+Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your image is already built:
+
+docker build -t edu-crrepo1 .
+
+After the build completes, tag your image so you can push the image to this repository:
+
+docker tag edu-crrepo1:latest 682033467551.dkr.ecr.ap-south-1.amazonaws.com/edu-crrepo1:latest
+
+Run the following command to push this image to your newly created AWS repository:
+
+docker push 682033467551.dkr.ecr.ap-south-1.amazonaws.com/edu-crrepo1:latest
+
+
+
+docker build -t edu-crrepo1 .
+
+How to Create Docker Container Images ?
+
+	- Docker Commit 		# Used to Create a Container Image based on the existing Container reference
+	
+	- Docker Build 			# Used to Create a Container Image based on the Dockerfile definitions
+							# Dockerfile of Instructions
+							
+		from 
+		
+		copy 		# copy files from host volume to container volume
+		
+		cp 			# cp is used to copy the files within the container volume 
+		
+		add         # add https://mywebapp1s301.s3.ap-south-1.amazonaws.com/javamvnartifacts1/target/loksaieta.war /usr/local/tomcat/webapps
+		
+		workdir		# set the current working dir
+		
+		expose 		# 8080
+		
+		run 		# apt
+		
+		env 		# set evni var - Home path
+		
+		cmd			# set the container start-up command/task 
+					# It can be modified during container creation time
+		
+		entrypoint  # set the container start-up command/task
+					# It cannot be modified during container creation time
+					
+					
+- Code Deploy 
+
+- Code Pipeline 
+
+- Cloud-formation to create aws resources
