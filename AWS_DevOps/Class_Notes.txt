@@ -291,3 +291,98 @@ How to Create Docker Container Images ?
 - Code Pipeline 
 
 - Cloud-formation to create aws resources
+
+
+
+#######################
+Day 6 - 2nd Mar. 2025
+#######################	
+
+
+	Code Build :
+	
+		- Create Artifact --> stored in the s3 Bucket 
+		
+		target/*.war
+
+	Code Deploy 
+	
+		- appspec.yaml 
+		
+	Target Server :
+	
+		- QA_Server :
+		
+			--> jdk,tomcat 
+			--> codedeploy agent 
+			--> Tomcat Service is up and running.
+			
+	IAM Services :
+	
+		--> User 
+		--> Group 
+		--> Roles 		
+		--> Policies 
+		
+	
+
+	IAM Roles & Policies :::
+	
+	Created IAM Role for Code Deploy 	
+	
+	Created IAM Policy for S3 Bucket access 
+
+	Create IAM Role for EC2 Instance and attached thie IAM Policy for S3 Bucket access
+	
+	Launch
+	
+		--> UserData? Startup Task :
+		
+			--> Install the CodeDeploy Agent 
+			
+			
+			
+	Cloud-Formation Templates :::
+	
+		- IAC Tool - Used to Provision AWS Resources
+		
+	
+	Elastic BeanStalk
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	User 1 --> S3 --> policy 
+	
+	CodeBuild Service --> Access EC2 Instance(Build Server) --> IAM Role
+	
+	CodeDeploy Service --> Access EC2 Instance(Tomcat) --> IAM Role
+	
+	****Azure DevOps Services!
+
+	Code Pipeline is an integration of CodeBuild & CodeDeploy
+	
+	
+	loksai-webapp-cb-proj1
+	
+	https://github.com/EDU-Monitoring-Feb25/devops-java-webapp.git
+	
+	
+
+
+
+
+
+
