@@ -351,19 +351,6 @@ Day 6 - 2nd Mar. 2025
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	User 1 --> S3 --> policy 
 	
 	CodeBuild Service --> Access EC2 Instance(Build Server) --> IAM Role
@@ -451,5 +438,325 @@ sudo java -version
 
 
 
+#######################
+Day 7 - 8th Mar. 2025
+#######################	
+
+
+	--> GitOps :::
+	
+	
+	
+	Infra-Structure Provisioning	==> Terraform/Cloud-formation/Azurerm
+	
+	Infra-Structure Configuration 	==> Ansible/Cloud-formation/Azurerm
+	
+	
+	DevOps CICD ::
+
+		-> Pre-requisites to execute CICD Pipeline Project?
+		
+		-> Build server/target server should ready
+		
+		
+	Jenkins Pipeline :
+	
+	Stages of pipeline :::
+	
+		- SCM_Checkout 	# Download the source code from github repo to build server 
+		
+		- Application Build 
+		
+		- Create Artifacts
+		
+		- Deploy to Target Server(Test Environment)
+		
+		
+	Scenario 1: 
+
+		Pipeline 1 :
+		
+		
+		SCM_Checkout	-->		Application	Build	--> 	Create Artifacts	-->		Deploy to QA_Server
+
+
+
+	Scenario 2:
+
+		Pipeline 1 :
+
+		SCM_Checkout	-->		Create New_QA_Server(Terraform)	--> 	Configure New_QA_Server(Ansible)
+		
+		Pipeline 2 :		
+		
+		SCM_Checkout	-->		Application	Build	--> 	Create Artifacts	-->		Deploy to New_QA_Server
+		
+		
+		
+	Scenario 3:
+
+		Pipeline 1 :
+
+		SCM_Checkout	-->		Application	Build	--> 	Create Artifacts	-->		Create New_QA_Server(Terraform)	--> 	Configure New_QA_Server(Ansible)
+		
+																																				|
+																																				|
+																																				|
+																																	
+																																		Deploy to New_QA_Server
+																																		
+																																				|
+																																				|
+																																				|
+																																				
+																																		Automated Testing
+																																		
+																																				|
+																																				|
+																																				|
+																																				
+																																		Notify the developers
+																																				
+																																				|
+																																				|
+																																				|
+																																				
+																																		Delete the New_QA_Server
+																																		
+		ArgoCD 
+		
+		Artifactory Libraries :::
+		
+		Code Build --> s3 bucket / jfrog Artifactory Library / Azure Artifacts   ===? Used to maintain the snapshot/version of application artifacts.
+		
+		github 		-- source code 
+		s3 bucket 	-- source code 
+		
+		
+		Azure DevOps Services : 
+		
+			- AzBoards				--> ALM(Application Lifecycle Management) Tool : / Jira
+			
+			- AzRepos				--> Distributed VCS / github
+			
+			- AzPipelines			--> Jenkins / github Actions
+			
+			- AzTest				--> Enable Automated testing
+			
+			- AzArtifacts
+		
+		
+		ACS / ACR - DOCKERHUB / 
+		
+		
+		
+		DevOps ==> DevSecOps
+		
+			IT Security Team:
+			
+				 static code analyzer
+				 
+					sonarqube server ==> code scan -- ensure the code quality / code coverage
+				 
+				 dynamic code analyzer
+			
+			
+		
+																																		
+
+
+#######################
+Day 8 - 9th Mar. 2025
+#######################																															
+	Q&A 
+	
+	Review
+	
+	
+	AWS Cloud Watch :::
+	
+		AWS Monitoring/Logging tool:
+		
+			Limited access to Cloud Watch 
+			
+				Prometheus/Grafana 
+				
+				
+	Build :
+		Create artifact 
+		
+	
+	vi Dockerfile :
+	
+		FROM tomcat:8.0
+		COPY ./target/loksaieta.war /usr/local/tomcat/webapps
+		EXPOSE 8080
+		
+	docker build -t <dockerhub_repo>/webappimg1:v1.0 .					# Dockerfile reference path
+	
+	
+	docker login -u <login_id>
+	
+	password: <dockerhub - PAT>			# AWS Credential Manager # encrypted
+	
+	docker push <dockerhub_repo>/webappimg1:v1.0
+	
+	Target Server:
+	
+	QA :
+	
+		docker run -it <dockerhub_repo>/webappimg1:v1.0 -p 8089:8080 bash
+		
+		<public_ip_addr>:8089			Run and Test the Application running in the container thru web browser.
+	
+	
+		
+	AWS Cloud 
+		
+	Git / Jenkins / Docker / Kubernetes / Prometheus/Grafana with Kubernetes / Terraform / Ansible 
+
+
+	cicd pipeline using jenkins & kubernetes
+	
+	
+	Maven Build Tool ::: ?
+	
+
+	Application Build :
+	
+		Maven/Gradle		# Used to Build Java Applications
+		
+		1. pom.xml 			# Project Object Model. To define the properties, dependencies and plugins to build java application
+		
+		2. maven goal		# Objective :
+		
+			mvn clean 		# To the Target Directory
+			
+			mvn compile 	# Compile the source code 
+			
+			mvn test 		# Perform Code Compilation and Unit Testing 
+			
+			mvn package 	# Compile, Unit Test and Create Artifacts
+			
+			mvn clean package 
+			
+			
+		
+		
+	CICD Pipeline : 
+	
+	Stages :
+	
+	1. SCM_Checkout
+	
+	2. Application Build 
+	
+	3. Application Image Build 				# Dockerfile 
+	
+	4. Publish Application Image to Container Registry 
+	
+	5. Deploy to Kubernetes_Cluser 
+	
+	
+	
+	Jenkins Architecture :::
+	
+		Jenkins_Master (VM)							# To Create Jenkins Pipeline Project and schedule to run in build agents.
+													# git,jdk,jenkins,<application Build Tool>
+						
+			Jenkins_Slave_Node (VM)					# Used to run the Application Build and Create Artifacts
+													# git,<application Build Tool>
+													
+		Scenario 1:	if the build frequency is very less with just one application build tool 
+					only jenkins master node.
+					
+		Scenario 2: 
+		
+				
+			Jenkins_Master (VM)							# To Create Jenkins Pipeline Project and schedule to run in build agents.
+														# git,jdk,jenkins,<application Build Tool>
+		
+				Jenkins_Slave_Node1 (VM)				# Java_Application_Build(jdk,git,maven)
+				Jenkins_Slave_Node2 (VM)				# Python_(git,python)
+				Jenkins_Slave_Node3 (VM)				# .Net (.net sdk)
+				Jenkins_Slave_Node4 (VM)				# NodeJS 
+				Jenkins_Slave_Node5 (VM)				# Angular
+				
+	
+pipeline {
+
+    agent { label 'slave1' }
+
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/EDU-Monitoring-Feb25/devops-java-webapp.git'
+            }
+        }
+        stage('Application_Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+				sh 'docker version'
+				sh "docker build -t loksaieta/edu-eta-app:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/edu-eta-app:${BUILD_NUMBER} loksaieta/edu-eta-app:latest"
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/edu-eta-app:latest"
+			}
+		}
+		stage('Deploy to Kubernetes') {
+            steps {
+				script {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'Kubernetes-Master', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f k8smvndeployment.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'k8smvndeployment.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			}	
+            }
+		}
+    }
+}		
+				
+
+
+
+
+		Jenkins_Master (VM)							# To Create Jenkins Pipeline Project and schedule to run in build agents.
+													# git,jdk,jenkins,<application Build Tool>
+	
+			Jenkins_Slave_Node1 (VM)				# Java_Application_Build(jdk,git,maven)
+
+		Kubernetes_Master
+			Kubernetes_WN1							Region1
+			Kubernetes_WN2							Region1 
+
+
+
+		Github	repo Src_code  		
+			
+			GitHub_Action - Create CICD Pipeline 
+					- Github-Action Runner 			# build Server
+					
+					- Target Server 				# Deployment 
+						- Kubernetes_Cluster 					
+
+				
 
 
